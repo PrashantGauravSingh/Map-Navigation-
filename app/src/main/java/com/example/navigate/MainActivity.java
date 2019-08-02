@@ -71,12 +71,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
                 //Start Navigation
-                NavigationLauncherOptions options=NavigationLauncherOptions.builder()
-                        .origin(originPosition)
-                        .destination(destinationPosition)
-                        .shouldSimulateRoute(true)
-                        .build();
-                NavigationLauncher.startNavigation(MainActivity.this,options);
+                try {
+                    NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+                            .origin(originPosition)
+                            .destination(destinationPosition)
+                            .shouldSimulateRoute(true)
+                            .build();
+                    NavigationLauncher.startNavigation(MainActivity.this, options);
+                }catch (Exception e){
+                    Log.e("","Error"+e);
+                }
             }
         });
     }
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void setCameraPosition(Location location){
-      mapbox.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),13.0));
+      mapbox.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),21.0));
     }
 
     @Override
